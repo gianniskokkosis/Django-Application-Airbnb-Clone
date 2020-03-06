@@ -1,0 +1,16 @@
+{% extends 'book_room/base.html' %}
+{% block content %}
+    <h2>Reviews of {{ user.username }}</h2>
+    {% for user_review in queryset %}
+        <div class="card mb-3">
+            <div class="card-body">    
+                <h5 class="card-title">
+                    <a href="{% url 'detail-review' user_review.id %}">
+                        Review for room {{ user_review.room.title }} from user {{ user_review.user.username }}:
+                    </a>
+                </h5>
+                <p class="card-text">{{ user_review.review_content }}</p>  
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

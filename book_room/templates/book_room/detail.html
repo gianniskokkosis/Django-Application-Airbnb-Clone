@@ -1,0 +1,30 @@
+{% extends 'book_room/base.html' %}
+{% block content %}
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item mr-2">
+            <a class="btn btn-primary" href="{% url 'new-review' room.id %}" role="button">Make a review</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-primary mr-2" href="{% url 'new-purchase' room.id %}" role="button">Book It!</a>        
+        </li>
+        <li class="nav-item mr-2">
+            <a class="btn btn-primary" href="{% url 'all-reviews' room.id %}" role="button">See all reviews</a>
+        </li>
+        </ul>
+    </div>
+    <div class="card mb-3">
+    <img class="card-img-top" src="{{ object.image_room.url }}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{ object.title }}</h5>
+        <h5>Location: </h5>
+        <p class="card-text">{{ object.location }}</p>
+        <h5>Price: </h5>
+        <p class="card-text">{{ room.price }}</p>
+        <h5>Number of Rooms: </h5>
+        <p class="card-text">{{ room.number_of_beds }}</p>
+        <h5>Details: </h5>
+        <p>{{ object.details }}</p>
+    </div>
+    </div>
+{% endblock %}

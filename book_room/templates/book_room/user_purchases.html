@@ -1,0 +1,24 @@
+{% extends 'book_room/base.html' %}
+{% block content %}
+    <h2>Purchases of {{ user.username }}</h2>
+    {% for user_purchases in queryset %}
+        <div class="card mb-3">
+            <div class="card-body">    
+                <h5 class="card-title">Purchases of user {{ user_purchases.user.username }}:</h5>
+                <h5 class="card-title">Purchased the room:</h5>
+                <p class="card-text">{{ user_purchases.room.title }}</p>
+                <h5 class="card-title">Buyer Details: </h5>
+                <p class="card-text"> <strong>Name: </strong>{{ user_purchases.name }}</p>
+                <p class="card-text"> <strong>Surname: </strong>{{ user_purchases.surname }}</p>
+                <p class="card-text"> <strong>Address: </strong>{{ user_purchases.address }}</p>
+                <p class="card-text"> <strong>City: </strong>{{ user_purchases.city }}</p>
+                <p class="card-text"> <strong>Card Name: </strong>{{ user_purchases.card_name }}</p>
+                <p class="card-text"> <strong>Card Number: </strong>{{ user_purchases.card_number }}</p>
+                <p class="card-text"> <strong>Card Expiration Date: </strong>{{ user_purchases.card_exp_date }}</p>
+                <p class="card-text"> <strong>Card CVV: </strong>{{ user_purchases.card_cvv }}</p>
+
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+

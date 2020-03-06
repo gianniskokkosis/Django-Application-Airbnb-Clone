@@ -1,0 +1,53 @@
+{% extends 'book_room/base.html' %}
+{% block content %}
+  <div class="content-section">
+    <h2 style="text-align: center;">Let's get started</h2>
+  </div>
+  <div class="content-section">
+    <form method="GET" action=".">
+      <div class=" form-group">
+        <label for="">
+          <h2>
+            Search your desirable destination
+          </h2>
+        </label>
+        <input class="form-control" type="search" name="search" id="search" placeholder="Search: eg. New York">
+      </div>
+      <div class="form-group">
+          <button style="width: 200px; height: 50px; text-align: center; margin: 0 auto;"  class="btn btn-success" type="submit"> Search </button>
+      </div>
+    </div>
+  {% for room in queryset %}
+    <div class="card mb-3">
+      <img class="card-img-top" src="{{ room.image_room.url }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ room.title }}</h5>
+        <p class="card-text">{{ room.location }}</p>
+        <p class="card-text">Price: {{ room.price }}</p>
+        <a class="btn btn-primary" href="{% url 'room-detail' room.id %}" role="button">View Details</a>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+{% endblock %}
